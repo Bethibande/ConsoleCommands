@@ -2,7 +2,9 @@ package com.bethibande.commands;
 
 import java.util.HashMap;
 
-public record ArgumentMap(HashMap<String, Object> parameterValues, HashMap<String, Object[]> argumentValues) {
+public record ArgumentMap(Command command,
+                          HashMap<String, Object> parameterValues,
+                          HashMap<String, Object[]> argumentValues) {
 
     public boolean hasArgument(final Argument argument) {
         return hasArgument(argument.getName());
