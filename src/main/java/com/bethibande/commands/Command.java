@@ -1,10 +1,12 @@
 package com.bethibande.commands;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class Command implements HasParameters, HasArguments, Parsable<CommandParseResult> {
 
@@ -12,11 +14,13 @@ public class Command implements HasParameters, HasArguments, Parsable<CommandPar
     private final List<Parameter<?>> parameters = new ArrayList<>();
     private final List<Argument> arguments = new ArrayList<>();
 
-    public Command(final String name) {
+    private Consumer<ArgumentMap> executor = null;
+
+    public Command(final @NotNull String name) {
         this.name = name;
     }
 
-    private Argument getArgument(final String name) {
+    private @Nullable Argument getArgument(final String name) {
         return arguments.stream().filter(a -> a.getName().equals(name)).findFirst().orElse(null);
     }
 
@@ -27,6 +31,7 @@ public class Command implements HasParameters, HasArguments, Parsable<CommandPar
         final HashMap<String, Object> parameterValues = new HashMap<>();
 
         while(true) {
+            this.checkIndex(command, index, 1, getName());
             final String value = command[index];
 
             if(value.startsWith(delimiter)) {
@@ -62,8 +67,16 @@ public class Command implements HasParameters, HasArguments, Parsable<CommandPar
         );
     }
 
-    public String getName() {
+    public void setExecutor(final @Nullable Consumer<ArgumentMap> executor) {
+        this.executor = executor;
+    }
+
+    public @NotNull String getName() {
         return name;
+    }
+
+    public @Nullable Consumer<ArgumentMap> getExecutor() {
+        return executor;
     }
 
     @Override

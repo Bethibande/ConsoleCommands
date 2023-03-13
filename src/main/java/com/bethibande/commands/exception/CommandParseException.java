@@ -14,7 +14,10 @@ public class CommandParseException extends CommandException {
         super(cause);
     }
 
-    public CommandParseException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
+    public CommandParseException(final String message,
+                                 final Throwable cause,
+                                 final boolean enableSuppression,
+                                 final boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

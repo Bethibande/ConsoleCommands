@@ -16,7 +16,7 @@ public class CommandMap {
     }
 
     public String parameterToString(final @NotNull Parameter<?> parameter) {
-        if(parameter.getAllowedValues() == null || parameter.getAllowedValues().get().length > 5) {
+        if(parameter.getAllowedValues() == null || parameter.getAllowedValues().get().length > 10) {
             return "[%s]".formatted(parameter.getName());
         }
 
@@ -35,7 +35,7 @@ public class CommandMap {
     }
 
     public String commandToString(final @NotNull Command command) {
-        final StringBuilder sb = new StringBuilder(command.getName());
+        StringBuilder sb = new StringBuilder(command.getName());
 
         for(Parameter<?> parameter : command.getParameters()) {
             sb.append(" %s".formatted(parameterToString(parameter)));
@@ -46,6 +46,8 @@ public class CommandMap {
         for(Argument argument : command.getArguments()) {
             sb.append(" %s,".formatted(argumentToString(argument)));
         }
+
+        if(!command.getArguments().isEmpty()) sb = sb.delete(sb.length()-1, sb.length());
 
         return sb.toString();
     }

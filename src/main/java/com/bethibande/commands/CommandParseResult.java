@@ -1,6 +1,7 @@
 package com.bethibande.commands;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public record CommandParseResult(Map<String, Object> parameterValues, Map<String, Object[]> argumentValues) {
+public record CommandParseResult(HashMap<String, Object> parameterValues, HashMap<String, Object[]> argumentValues) {
 }

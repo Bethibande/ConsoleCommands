@@ -54,6 +54,13 @@ public class Parameter<T> implements Parsable<T> {
             index++;
         }
 
+        if(hasLength) {
+            sb.deleteCharAt(0);
+            sb.deleteCharAt(sb.length()-1);
+        }
+
+        boolean validation = true;
+
         if(allowedValues != null) {
             boolean found = false;
             for(String allowed : allowedValues.get()) {
@@ -62,13 +69,14 @@ public class Parameter<T> implements Parsable<T> {
                     break;
                 }
             }
-            if(!found) this.invalidValue(getName());
+            if(!found) validation = false;
         }
 
         if(valueValidator != null) {
-            final boolean state = valueValidator.apply(sb.toString());
-            if(!state) this.invalidValue(getName());
+            validation = valueValidator.apply(sb.toString());
         }
+
+        if(!validation) this.invalidValue(getName());
 
         T value = null;
         try {

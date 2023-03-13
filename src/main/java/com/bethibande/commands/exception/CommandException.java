@@ -16,7 +16,10 @@ public class CommandException extends RuntimeException {
         super(cause);
     }
 
-    public CommandException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
+    public CommandException(final String message,
+                            final Throwable cause,
+                            final boolean enableSuppression,
+                            final boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
