@@ -6,10 +6,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class IntParameter extends Parameter<Integer> {
+public class LongParameter extends Parameter<Long> {
 
-    public IntParameter(final @NotNull String name) {
-        super(name, Integer::parseInt);
+    public LongParameter(final @NotNull String name) {
+        super(name, Long::parseLong);
         setValueValidator(null);
     }
 
@@ -26,4 +26,5 @@ public class IntParameter extends Parameter<Integer> {
             return valueValidator.apply(s);
         });
     }
+
 }
