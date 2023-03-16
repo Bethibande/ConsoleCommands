@@ -1,6 +1,6 @@
 # ConsoleCommands
 
-A simple framework for implementing commandline commands
+A simple framework for implementing console commands
 
 ## Download
 
